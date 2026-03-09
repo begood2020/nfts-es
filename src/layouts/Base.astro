@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+const { title = 'nfts.es', description = 'Noticias, tutoriales y análisis sobre NFTs en español.' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title} — nfts.es</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="nfts.es RSS" href="/rss.xml" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="nfts.es" />
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="site-logo">nfts<span>.</span>es</a>
+        <nav class="site-nav">
+          <a href="/noticias">Noticias</a>
+          <a href="/tutoriales">Tutoriales</a>
+          <a href="/sobremi">Sobre Mí</a>
+          <a href="https://nftses.beehiiv.com" target="_blank" class="nav-newsletter">Newsletter</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-copy">© {new Date().getFullYear()} nfts.es — Todos los derechos reservados</p>
+        <div class="footer-links">
+          <a href="/rss.xml">RSS</a>
+          <a href="https://nftses.beehiiv.com" target="_blank">Newsletter</a>
+          <a href="/sobremi">Sobre Mí</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

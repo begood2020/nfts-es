@@ -1,0 +1,53 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tags = [...new Set(posts.flatMap(p => p.data.tags || []))];
+  return tags.map(tag => ({
+    params: { tag },
+    props: { tag, posts: posts.filter(p => p.data.tags?.includes(tag))
+      .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()) }
+  }));
+}
+
+const { tag, posts } = Astro.props;
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('es-ES', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
+}
+---
+
+<Base title={`${tag} — nfts.es`} description={`Artículos sobre ${tag} en nfts.es`}>
+  <div class="container">
+    <a href="/" class="back-link">← Volver al inicio</a>
+
+    <div style="padding: 2rem 0 1rem;">
+      <p class="hero-label">// Categoría</p>
+      <h1 style="font-family: var(--font-head); font-size: 2.5rem; color: var(--text); margin-bottom: 0.5rem;">{tag}</h1>
+      <p style="color: var(--text-muted); font-size: 0.85rem;">{posts.length} artículos</p>
+    </div>
+
+    <div class="posts-grid">
+      {posts.map(post => (
+        <article class="post-card">
+          <div>
+            <div class="post-meta">
+              <span class="post-date">{formatDate(post.data.date)}</span>
+            </div>
+            <a href={`/${post.slug}`} class="post-title">{post.data.title}</a>
+            {post.data.excerpt && (
+              <p class="post-excerpt">{post.data.excerpt}</p>
+            )}
+          </div>
+          {post.data.featureImage && (
+            <img src={post.data.featureImage} alt={post.data.title} class="post-thumb" loading="lazy" />
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</Base>

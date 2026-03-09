@@ -1,0 +1,13 @@
+# Redirects Ghost Pro URLs → new Astro structure
+# Ghost used /ghost/ admin URL (not needed in static site)
+
+# Old Ghost tag pages
+/tag/noticias /tag/noticias 200
+/tag/tutoriales /tag/tutoriales 200
+/tag/entrevistas /tag/entrevistas 200
+
+# Ghost pages that were at /page-slug → now at /slug
+/sobremi /sobremi 200
+
+# Catch-all: keep all slugs working
+/* /:splat 200

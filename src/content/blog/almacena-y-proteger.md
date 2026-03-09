@@ -1,0 +1,12 @@
+---
+title: "¿Cómo almaceno y protejo mi colección de NFT?"
+slug: "almacena-y-proteger"
+date: 2023-05-31
+type: post
+tags: ["tutoriales"]
+featureImage: "/images/images/2023/05/NTFsecure.jpg"
+---
+
+Almacenar y proteger tu colección de NFTs es crucial para garantizar la seguridad de tus activos digitales. Aquí tienes algunos consejos para almacenar y proteger tus NFTs de manera efectiva:
+
+- Billetera de criptomonedas: Utiliza una billetera de criptomonedas compatible con NFTs. Algunas billeteras populares incluyen MetaMask, Trust Wallet, y MyEtherWallet. Estas billeteras te permiten gestionar y acceder a tus NFTs de manera segura.- Billetera de hardware: Considera el uso de una billetera de hardware para almacenar tus NFTs. Estas billeteras físicas ofrecen un nivel adicional de seguridad al mantener tus claves privadas fuera de línea. Ejemplos de billeteras de hardware incluyen Ledger, Trezor y KeepKey.- Respaldo de claves privadas: Realiza copias de seguridad de tus claves privadas o frases de recuperación en un lugar seguro y fuera de línea. Esto te permite restaurar el acceso a tus NFTs en caso de pérdida o daño de tu dispositivo principal.- Autenticación de dos factores (2FA): Habilita la autenticación de dos factores en tu billetera y en cualquier plataforma de NFTs que utilices. Esto agrega una capa adicional de seguridad al requerir un código único generado por una aplicación de autenticación en tu dispositivo móvil.- Actualiza y protege tu dispositivo: Mantén tu dispositivo (computadora o teléfono móvil) actualizado con las últimas actualizaciones de seguridad y antivirus. Utiliza contraseñas fuertes y evita conectarte a redes Wi-Fi públicas no seguras.- Verifica las plataformas de NFTs: Antes de utilizar una plataforma de NFTs, investiga sobre su reputación, seguridad y medidas de protección. Asegúrate de utilizar plataformas confiables y bien establecidas que tengan buenas prácticas de seguridad.- Evita enlaces y archivos sospechosos: Sé cauteloso al hacer clic en enlaces o descargar archivos relacionados con tus NFTs. - Evita compartir información sensible, como tus claves privadas, en sitios web o mensajes no verificados.**Recuerda que al final la seguridad de tus NFTs es responsabilidad tuya.** Sigue buenas prácticas de seguridad y mantente informado sobre las últimas tendencias y medidas de protección.

@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('es-ES', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+---
+
+<Base title={post.data.title} description={post.data.excerpt || post.data.title}>
+
+  <div class="container">
+    <a href="/" class="back-link">← Volver al inicio</a>
+  </div>
+
+  <!-- ARTICLE HEADER -->
+  <header class="article-header">
+    <div class="container">
+      <div class="article-meta">
+        {post.data.tags?.map((tag: string) => (
+          <a href={`/tag/${tag}`} class="tag-pill">{tag}</a>
+        ))}
+        <span class="post-date">{formatDate(post.data.date)}</span>
+      </div>
+      <h1>{post.data.title}</h1>
+      {post.data.excerpt && (
+        <p class="article-excerpt">{post.data.excerpt}</p>
+      )}
+    </div>
+  </header>
+
+  <!-- FEATURE IMAGE -->
+  {post.data.featureImage && (
+    <div class="container">
+      <img
+        src={post.data.featureImage}
+        alt={post.data.title}
+        class="article-feature-image"
+        loading="eager"
+      />
+    </div>
+  )}
+
+  <!-- ARTICLE BODY -->
+  <div class="container">
+    <div class="article-body">
+      <Content />
+
+      <!-- Newsletter CTA inline -->
+      <div class="newsletter-cta">
+        <h3>📬 ¿Te ha gustado este artículo?</h3>
+        <p>Suscríbete a la newsletter de nfts.es y recibe cada semana los mejores artículos sobre NFTs y Web3 en español.</p>
+        <a href="https://nftses.beehiiv.com" target="_blank">Suscribirme gratis →</a>
+      </div>
+    </div>
+  </div>
+
+</Base>

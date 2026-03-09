@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const featured = posts[0];
+const rest = posts.slice(1, 13);
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('es-ES', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
+}
+---
+
+<Base title="nfts.es — NFTs en Español" description="Noticias, tutoriales y análisis sobre NFTs y Web3 para la comunidad hispanohablante.">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-label">// El referente NFT en español</p>
+      <h1>Todo sobre <em>NFTs</em> y Web3 en tu idioma</h1>
+      <p class="hero-desc">
+        Noticias, tutoriales, entrevistas y análisis del ecosistema NFT para la comunidad hispanohablante. Sin tecnicismos innecesarios.
+      </p>
+      <div class="hero-actions">
+        <a href="https://nftses.beehiiv.com" target="_blank" class="btn btn-primary">→ Suscríbete gratis</a>
+        <a href="#articulos" class="btn btn-secondary">Ver artículos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAGS BAR -->
+  <div class="container">
+    <div class="tags-bar">
+      <a href="/" class="tag-pill active">Todo</a>
+      <a href="/tag/noticias" class="tag-pill">Noticias</a>
+      <a href="/tag/tutoriales" class="tag-pill">Tutoriales</a>
+      <a href="/tag/entrevistas" class="tag-pill">Entrevistas</a>
+    </div>
+  </div>
+
+  <!-- POSTS -->
+  <section id="articulos">
+    <div class="container">
+      <div class="posts-grid">
+
+        <!-- Featured post -->
+        {featured && (
+          <article class="post-card featured">
+            {featured.data.featureImage && (
+              <img
+                src={featured.data.featureImage}
+                alt={featured.data.title}
+                class="post-thumb"
+                loading="eager"
+              />
+            )}
+            <div>
+              <div class="post-meta">
+                {featured.data.tags?.[0] && (
+                  <span class="post-tag">{featured.data.tags[0]}</span>
+                )}
+                <span class="post-date">{formatDate(featured.data.date)}</span>
+              </div>
+              <a href={`/${featured.slug}`} class="post-title">{featured.data.title}</a>
+              {featured.data.excerpt && (
+                <p class="post-excerpt">{featured.data.excerpt}</p>
+              )}
+            </div>
+          </article>
+        )}
+
+        <!-- Rest of posts -->
+        {rest.map(post => (
+          <article class="post-card">
+            <div>
+              <div class="post-meta">
+                {post.data.tags?.[0] && (
+                  <span class="post-tag">{post.data.tags[0]}</span>
+                )}
+                <span class="post-date">{formatDate(post.data.date)}</span>
+              </div>
+              <a href={`/${post.slug}`} class="post-title">{post.data.title}</a>
+              {post.data.excerpt && (
+                <p class="post-excerpt">{post.data.excerpt}</p>
+              )}
+            </div>
+            {post.data.featureImage && (
+              <img
+                src={post.data.featureImage}
+                alt={post.data.title}
+                class="post-thumb"
+                loading="lazy"
+              />
+            )}
+          </article>
+        ))}
+
+      </div>
+
+      <!-- View all -->
+      {posts.length > 13 && (
+        <div style="text-align:center; padding: 2rem 0;">
+          <a href="/archivo" class="btn btn-secondary">Ver todos los artículos ({posts.length})</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- NEWSLETTER CTA -->
+  <div class="container">
+    <div class="newsletter-cta">
+      <h3>📬 No te pierdas nada del mundo NFT</h3>
+      <p>Recibe cada semana las noticias más importantes, tutoriales exclusivos y análisis del mercado directamente en tu email.</p>
+      <a href="https://nftses.beehiiv.com" target="_blank">Suscribirme gratis →</a>
+    </div>
+  </div>
+
+</Base>
